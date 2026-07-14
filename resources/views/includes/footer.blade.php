@@ -1,0 +1,5 @@
+<footer class="mt-5 py-3 bg-light text-center">
+    <div class="container">
+        <small class="text-muted">&copy; {{ date('Y') }} Admin</small>
+    </div>
+</footer>
