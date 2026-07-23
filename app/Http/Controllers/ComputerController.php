@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class ComputerController extends Controller
 {
+    
+    public function index()
+    {
+        $computers = Computer::all();
+
+        return ($computers);
+    }
+    
     public function create()
     {
         $computers = Computer::all();
@@ -18,6 +26,6 @@ class ComputerController extends Controller
     {
         $computer = Computer::create($request->all());
 
-        return redirect()->route('computers.create')->with('record', $computer->toJson(JSON_PRETTY_PRINT));
+        return redirect()->route('computers.create');
     }
 }

@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use MongoDB\Laravel\Eloquent\Model;
 
 class Course_Teacher extends Model
 {
-    use HasFactory;
     protected $connection = 'mongodb';
 
     protected $table = 'course__teachers';

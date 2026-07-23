@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 // 1. REEMPLAZAMOS el modelo original por el de MongoDB
 use MongoDB\Laravel\Eloquent\Model; 
 use App\Models\Course;
@@ -10,7 +9,6 @@ use App\Models\Computer;
 
 class Apprentice extends Model
 {
-    use HasFactory;
 
     // 2. LE DECIMOS que use la conexión que creamos en database.php
     protected $connection = 'mongodb';
