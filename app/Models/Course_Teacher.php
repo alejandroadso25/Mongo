@@ -4,21 +4,30 @@ namespace App\Models;
 
 use MongoDB\Laravel\Eloquent\Model;
 
-class Course_Teacher extends Model
+// Modelo de asignación de Cursos a Instructores/Maestros
+class CourseTeacher extends Model
 {
+    // Conexión a la base de datos MongoDB
     protected $connection = 'mongodb';
 
-    protected $table = 'course__teachers';
+    // Colección en la base de datos
+    protected $table = 'course_teachers';
 
-    protected $fillable = ['course_id', 'teacher_id'];
+    // Campos que pueden ser asignados masivamente
+    protected $fillable = [
+        'course_id',  // Referencia al curso
+        'teacher_id'  // Referencia al maestro/instructor
+    ];
 
+    // Relación: Esta asignación pertenece a un Curso
     public function course()
     {
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Course::class, 'course_id');
     }
 
+    // Relación: Esta asignación pertenece a un Instructor/Maestro
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(Teacher::class, 'teacher_id');
     }
 }

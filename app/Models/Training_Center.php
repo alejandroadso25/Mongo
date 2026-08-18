@@ -4,26 +4,30 @@ namespace App\Models;
 
 use MongoDB\Laravel\Eloquent\Model;
 
+// Modelo de Centro de Capacitación - Representa instituciones que imparten cursos
 class Training_Center extends Model
 {
-
+    // Conexión a la base de datos MongoDB
     protected $connection = 'mongodb';
 
+    // Campos que pueden ser asignados masivamente
     protected $fillable = [
-        'name',
-        'location'
+        'name',     // Nombre del centro
+        'location'  // Ubicación del centro
     ];
 
-
+    // Relación: Un centro tiene muchas áreas
     public function areas(){
-        return $this->hasMany('App\Models\Area');
+        return $this->hasMany(Area::class, 'training_center_id');
     }
 
+    // Relación: Un centro imparte muchos cursos
     public function courses(){
-        return $this->hasMany('App\Models\Course');
+        return $this->hasMany(Course::class, 'training_center_id');
     }
 
+    // Relación: Un centro emplea muchos maestros
     public function teachers(){
-        return $this->hasMany('App\Models\Teacher');
+        return $this->hasMany(Teacher::class, 'training_center_id');
     }
 } 

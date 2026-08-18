@@ -2,28 +2,45 @@
 
 namespace App\Models;
 
-// 1. REEMPLAZAMOS el modelo original por el de MongoDB
-use MongoDB\Laravel\Eloquent\Model; 
-use App\Models\Course;
-use App\Models\Computer;
+use MongoDB\Laravel\Eloquent\Model;
 
 class Apprentice extends Model
 {
-
-    // 2. LE DECIMOS que use la conexión que creamos en database.php
+    // Conexión a MongoDB
     protected $connection = 'mongodb';
 
-    // Queda exactamente igual
-    protected $fillable = ['name', 'email', 'cell_number', 'course_id', 'computer_id'];
+    // Campos asignables masivamente
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',       // o 'cell_number', asegúrate de que coincida con el formulario
+        'course_id',
+        'computer_id'
+    ];
 
-    // Tus relaciones se mantienen intactas y seguirán funcionando
+    // Atributos computados a incluir en la serialización
+    protected $appends = ['course_display', 'computer_display'];
+
+    // Relación: un aprendiz pertenece a un curso
     public function course()
     {
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Course::class, 'course_id');
     }
 
+    // Relación: un aprendiz usa una computadora
     public function computer()
     {
-        return $this->belongsTo(Computer::class);
+        return $this->belongsTo(Computer::class, 'computer_id');
+    }
+
+    // Acesores para mostrar información legible
+    public function getCourseDisplayAttribute()
+    {
+        return $this->course?->course_number ?? 'No asignado';
+    }
+
+    public function getComputerDisplayAttribute()
+    {
+        return $this->computer?->full_name ?? 'No asignada';
     }
 }

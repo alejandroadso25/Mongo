@@ -3,9 +3,9 @@
 @section('content')
 <div class="container mt-5">
     <div class="row mb-4">
-        <div class="col-md-6"><h2>Computadoras</h2></div>
+        <div class="col-md-6"><h2>Centros de Capacitación</h2></div>
         <div class="col-md-6 text-end">
-            <a href="{{ route('computers.create') }}" class="btn btn-primary">+ Nueva Computadora</a>
+            <a href="{{ route('training-centers.create') }}" class="btn btn-primary">+ Nuevo Centro</a>
         </div>
     </div>
 
@@ -13,29 +13,27 @@
         <div class="alert alert-success" role="alert">{{ $message }}</div>
     @endif
 
-    @if ($computers->count())
+    @if ($training_centers->count())
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
                     <tr>
                         <th>ID</th>
-                        <th>Número</th>
-                        <th>Marca</th>
-                        <th>Área</th>
+                        <th>Nombre</th>
+                        <th>Ubicación</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($computers as $computer)
+                    @foreach ($training_centers as $training_center)
                         <tr>
-                            <td>{{ $computer->id }}</td>
-                            <td>{{ $computer->number }}</td>
-                            <td>{{ $computer->brand }}</td>
-                            <td>{{ $computer->area?->name ?? 'N/A' }}</td>
+                            <td>{{ $training_center->id }}</td>
+                            <td>{{ $training_center->name }}</td>
+                            <td>{{ $training_center->location }}</td>
                             <td>
-                                <a href="{{ route('computers.show', $computer->id) }}" class="btn btn-info btn-sm">Ver</a>
-                                <a href="{{ route('computers.edit', $computer->id) }}" class="btn btn-warning btn-sm">Editar</a>
-                                <form action="{{ route('computers.destroy', $computer->id) }}" method="POST" style="display:inline-block;">
+                                <a href="{{ route('training-centers.show', $training_center->id) }}" class="btn btn-info btn-sm">Ver</a>
+                                <a href="{{ route('training-centers.edit', $training_center->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                                <form action="{{ route('training-centers.destroy', $training_center->id) }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro?')">Eliminar</button>
@@ -47,7 +45,7 @@
             </table>
         </div>
     @else
-        <div class="alert alert-info">No hay computadoras registradas. <a href="{{ route('computers.create') }}">Crear una</a></div>
+        <div class="alert alert-info">No hay centros registrados. <a href="{{ route('training-centers.create') }}">Crear uno</a></div>
     @endif
 </div>
 @endsection

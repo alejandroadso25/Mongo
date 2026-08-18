@@ -92,11 +92,10 @@ return [
             // 'encrypt' => env('DB_ENCRYPT', 'yes'),
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
-
         'mongodb' => [
-            'driver' => 'mongodb',
-            'dsn' => env('MONGO_DSN'),
-            'database' => env('MONGO_DATABASE'),
+        'driver'   => 'mongodb', // Conexion establecida con el driver de MongoDB
+        'dsn'      => env('DB_URI'),
+        'database' => env('DB_DATABASE'),
         ],
 
     ],
