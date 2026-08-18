@@ -9,10 +9,24 @@ use Illuminate\Http\Request;
 
 class ApprenticeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $apprentices = Apprentice::with(['course', 'computer'])->get();
-        return view('Apprentice.index', compact('apprentices'));
+        $search = $request->input('search', '');
+        
+        $query = Apprentice::with(['course', 'computer']);
+        
+        if (!empty($search)) {
+            $query->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%")
+                  ->orWhere('phone', 'like', "%{$search}%")
+                  ->orWhereHas('course', function ($q) use ($search) {
+                      $q->where('course_number', 'like', "%{$search}%");
+                  });
+        }
+        
+        $apprentices = $query->get();
+        
+        return view('Apprentice.index', compact('apprentices', 'search'));
     }
 
     public function show(Apprentice $apprentice)

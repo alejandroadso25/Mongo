@@ -10,10 +10,23 @@ use Illuminate\Http\Request;
 class TeacherController extends Controller
 {
     // Listar todos los instructores (cargando relaciones si aplican)
-    public function index()
+    public function index(Request $request)
     {
-        $teachers = Teacher::with(['area', 'trainingCenter'])->get();
-        return view('Teacher.index', compact('teachers'));
+        $search = $request->input('search', '');
+        
+        $query = Teacher::with(['area', 'trainingCenter']);
+        
+        if (!empty($search)) {
+            $query->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%")
+                  ->orWhereHas('area', function ($q) use ($search) {
+                      $q->where('name', 'like', "%{$search}%");
+                  });
+        }
+        
+        $teachers = $query->get();
+        
+        return view('Teacher.index', compact('teachers', 'search'));
     }
 
     // Ver detalles de un instructor (Carga ansiosa para mostrar nombres de Área/Centro)

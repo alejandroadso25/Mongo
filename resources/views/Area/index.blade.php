@@ -17,6 +17,19 @@
         </div>
     @endif
 
+    <!-- Buscador -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form action="{{ route('areas.index') }}" method="GET" class="d-flex gap-2">
+                <input type="text" name="search" class="form-control" placeholder="Buscar por nombre..." value="{{ $search }}">
+                <button type="submit" class="btn btn-outline-primary">🔍 Buscar</button>
+                @if (!empty($search))
+                    <a href="{{ route('areas.index') }}" class="btn btn-outline-secondary">✕ Limpiar</a>
+                @endif
+            </form>
+        </div>
+    </div>
+
     @if ($areas->count())
         <div class="table-responsive">
             <table class="table table-striped table-hover">

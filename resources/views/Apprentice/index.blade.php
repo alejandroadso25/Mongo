@@ -15,6 +15,19 @@
         <div class="alert alert-success" role="alert">{{ $message }}</div>
     @endif
 
+    <!-- Buscador -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form action="{{ route('apprentices.index') }}" method="GET" class="d-flex gap-2">
+                <input type="text" name="search" class="form-control" placeholder="Buscar por nombre, email o curso..." value="{{ $search }}">
+                <button type="submit" class="btn btn-outline-primary">🔍 Buscar</button>
+                @if (!empty($search))
+                    <a href="{{ route('apprentices.index') }}" class="btn btn-outline-secondary">✕ Limpiar</a>
+                @endif
+            </form>
+        </div>
+    </div>
+
     @if ($apprentices->count())
         <div class="table-responsive">
             <table class="table table-striped table-hover">

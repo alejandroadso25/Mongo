@@ -10,10 +10,23 @@ use Illuminate\Http\Request;
 class CourseController extends Controller
 {
     // Listar todos los cursos (con relaciones cargadas para la vista index)
-    public function index()
+    public function index(Request $request)
     {
-        $courses = Course::with(['area', 'trainingCenter'])->get();
-        return view('Course.index', compact('courses'));
+        $search = $request->input('search', '');
+        
+        $query = Course::with(['area', 'trainingCenter']);
+        
+        if (!empty($search)) {
+            $query->where('course_number', 'like', "%{$search}%")
+                  ->orWhere('day', 'like', "%{$search}%")
+                  ->orWhereHas('area', function ($q) use ($search) {
+                      $q->where('name', 'like', "%{$search}%");
+                  });
+        }
+        
+        $courses = $query->get();
+        
+        return view('Course.index', compact('courses', 'search'));
     }
 
     // Ver detalles de un curso (Carga las relaciones para mostrar nombres en lugar de IDs)

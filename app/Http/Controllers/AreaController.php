@@ -8,10 +8,19 @@ use Illuminate\Http\Request;
 class AreaController extends Controller
 {
     // Listar todas las áreas
-    public function index()
+    public function index(Request $request)
     {
-        $areas = Area::all();
-        return view('Area.index', compact('areas'));
+        $search = $request->input('search', '');
+        
+        $query = Area::query();
+        
+        if (!empty($search)) {
+            $query->where('name', 'like', "%{$search}%");
+        }
+        
+        $areas = $query->get();
+        
+        return view('Area.index', compact('areas', 'search'));
     }
 
     // Ver detalles de un área

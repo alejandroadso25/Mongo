@@ -9,10 +9,23 @@ use Illuminate\Http\Request;
 class ComputerController extends Controller
 {
     // Listar todas las computadoras
-    public function index()
+    public function index(Request $request)
     {
-        $computers = Computer::with(['area'])->get();
-        return view('Computer.index', compact('computers'));
+        $search = $request->input('search', '');
+        
+        $query = Computer::with(['area']);
+        
+        if (!empty($search)) {
+            $query->where('brand', 'like', "%{$search}%")
+                  ->orWhere('number', 'like', "%{$search}%")
+                  ->orWhereHas('area', function ($q) use ($search) {
+                      $q->where('name', 'like', "%{$search}%");
+                  });
+        }
+        
+        $computers = $query->get();
+        
+        return view('Computer.index', compact('computers', 'search'));
     }
 
     // Ver detalles de una computadora

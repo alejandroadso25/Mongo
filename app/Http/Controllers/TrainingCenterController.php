@@ -8,10 +8,20 @@ use Illuminate\Http\Request;
 class TrainingCenterController extends Controller
 {
     // Listar todos los centros de capacitación
-    public function index()
+    public function index(Request $request)
     {
-        $training_centers = Training_Center::all();
-        return view('Training_Center.index', compact('training_centers'));
+        $search = $request->input('search', '');
+        
+        $query = Training_Center::query();
+        
+        if (!empty($search)) {
+            $query->where('name', 'like', "%{$search}%")
+                  ->orWhere('location', 'like', "%{$search}%");
+        }
+        
+        $training_centers = $query->get();
+        
+        return view('Training_Center.index', compact('training_centers', 'search'));
     }
 
     // Ver detalles de un centro de capacitación

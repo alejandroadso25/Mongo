@@ -9,10 +9,25 @@ use Illuminate\Http\Request;
 
 class CourseTeacherController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $courseTeachers = CourseTeacher::with(['course', 'teacher'])->get();
-        return view('CourseTeacher.index', compact('courseTeachers'));
+        $search = $request->input('search', '');
+        
+        $query = CourseTeacher::with(['course', 'teacher']);
+        
+        if (!empty($search)) {
+            $query->whereHas('course', function ($q) use ($search) {
+                $q->where('course_number', 'like', "%{$search}%");
+            })
+            ->orWhereHas('teacher', function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+        
+        $courseTeachers = $query->get();
+        
+        return view('CourseTeacher.index', compact('courseTeachers', 'search'));
     }
 
     public function show(CourseTeacher $courseTeacher)
