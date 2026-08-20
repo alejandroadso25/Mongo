@@ -3,9 +3,9 @@
 @section('content')
 <div class="container mt-5">
     <div class="row mb-4">
-        <div class="col-md-6"><h2>Docentes</h2></div>
+        <div class="col-md-6"><h2>Instructores</h2></div>
         <div class="col-md-6 text-end">
-            <a href="{{ route('teachers.create') }}" class="btn btn-primary">+ Nuevo Docente</a>
+            <a href="{{ route('teachers.create') }}" class="btn btn-primary">+ Nuevo Instructor</a>
         </div>
     </div>
 
@@ -31,7 +31,6 @@
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th>ID</th>
                         <th>Nombre</th>
                         <th>Email</th>
                         <th>Área</th>
@@ -42,7 +41,6 @@
                 <tbody>
                     @foreach ($teachers as $teacher)
                         <tr>
-                            <td>{{ $teacher->id }}</td>
                             <td>{{ $teacher->name }}</td>
                             <td>{{ $teacher->email }}</td>
                             <td>{{ $teacher->area?->name ?? 'N/A' }}</td>

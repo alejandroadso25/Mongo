@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h2>Detalles de la Computadora</h2>
+                    <h2>Detalles del Computador</h2>
                 </div>
                 <div class="card-body">
                     <div class="form-group row mb-3">
@@ -19,12 +19,6 @@
                         <label class="col-sm-3 col-form-label"><strong>Marca:</strong></label>
                         <div class="col-sm-9">
                             <p class="form-control-plaintext">{{ $computer->brand }}</p>
-                        </div>
-                    </div>
-                    <div class="form-group row mb-3">
-                        <label class="col-sm-3 col-form-label"><strong>Área:</strong></label>
-                        <div class="col-sm-9">
-                            <p class="form-control-plaintext">{{ $computer->area?->name ?? 'N/A' }}</p>
                         </div>
                     </div>
                 </div>

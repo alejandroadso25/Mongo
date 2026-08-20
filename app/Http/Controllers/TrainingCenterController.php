@@ -41,7 +41,12 @@ class TrainingCenterController extends Controller
     // Guardar nuevo centro de capacitación
     public function store(Request $request)
     {
-        $trainingCenter = Training_Center::create($request->all());
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'location' => ['required', 'string', 'max:255'],
+        ]);
+
+        Training_Center::create($validated);
 
         return redirect()->route('training-centers.index')->with('success', 'Centro de capacitación creado correctamente');
     }
@@ -55,7 +60,12 @@ class TrainingCenterController extends Controller
     // Actualizar centro de capacitación
     public function update(Request $request, Training_Center $trainingCenter)
     {
-        $trainingCenter->update($request->all());
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'location' => ['required', 'string', 'max:255'],
+        ]);
+
+        $trainingCenter->update($validated);
 
         return redirect()->route('training-centers.show', $trainingCenter->id)->with('success', 'Centro de capacitación actualizado correctamente');
     }

@@ -48,7 +48,14 @@ class CourseController extends Controller
     // Guardar nuevo curso
     public function store(Request $request)
     {
-        Course::create($request->all());
+        $validated = $request->validate([
+            'course_number' => ['required', 'string', 'max:100'],
+            'day' => ['required', 'string', 'max:50'],
+            'area_id' => ['required', 'string', 'max:100'],
+            'training_center_id' => ['required', 'string', 'max:100'],
+        ]);
+
+        Course::create($validated);
 
         return redirect()->route('courses.index')->with('success', 'Curso creado correctamente');
     }
@@ -65,7 +72,14 @@ class CourseController extends Controller
     // Actualizar curso
     public function update(Request $request, Course $course)
     {
-        $course->update($request->all());
+        $validated = $request->validate([
+            'course_number' => ['required', 'string', 'max:100'],
+            'day' => ['required', 'string', 'max:50'],
+            'area_id' => ['required', 'string', 'max:100'],
+            'training_center_id' => ['required', 'string', 'max:100'],
+        ]);
+
+        $course->update($validated);
 
         return redirect()->route('courses.show', $course->id)->with('success', 'Curso actualizado correctamente');
     }

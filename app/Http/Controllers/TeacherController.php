@@ -48,7 +48,14 @@ class TeacherController extends Controller
     // Guardar nuevo instructor
     public function store(Request $request)
     {
-        Teacher::create($request->all());
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'area_id' => ['required', 'string', 'max:100'],
+            'training_center_id' => ['required', 'string', 'max:100'],
+        ]);
+
+        Teacher::create($validated);
 
         return redirect()->route('teachers.index')->with('success', 'Instructor creado correctamente');
     }
@@ -65,7 +72,14 @@ class TeacherController extends Controller
     // Actualizar instructor
     public function update(Request $request, Teacher $teacher)
     {
-        $teacher->update($request->all());
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'area_id' => ['required', 'string', 'max:100'],
+            'training_center_id' => ['required', 'string', 'max:100'],
+        ]);
+
+        $teacher->update($validated);
 
         return redirect()->route('teachers.show', $teacher->id)->with('success', 'Instructor actualizado correctamente');
     }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Computer;
-use App\Models\Area;
 use Illuminate\Http\Request;
 
 class ComputerController extends Controller
@@ -13,14 +12,11 @@ class ComputerController extends Controller
     {
         $search = $request->input('search', '');
         
-        $query = Computer::with(['area']);
+        $query = Computer::query();
         
         if (!empty($search)) {
             $query->where('brand', 'like', "%{$search}%")
-                  ->orWhere('number', 'like', "%{$search}%")
-                  ->orWhereHas('area', function ($q) use ($search) {
-                      $q->where('name', 'like', "%{$search}%");
-                  });
+                  ->orWhere('number', 'like', "%{$search}%");
         }
         
         $computers = $query->get();
@@ -31,35 +27,42 @@ class ComputerController extends Controller
     // Ver detalles de una computadora
     public function show(Computer $computer)
     {
-        $computer->load(['area']);
         return view('Computer.show', compact('computer'));
     }
     
     // Mostrar formulario para crear computadora
     public function create()
     {
-        $areas = Area::all();
-        return view('Computer.create', compact('areas'));
+        return view('Computer.create');
     }
 
     // Guardar nueva computadora
     public function store(Request $request)
     {
-        Computer::create($request->all());
+        $validated = $request->validate([
+            'number' => ['required', 'string', 'max:255'],
+            'brand' => ['required', 'string', 'max:255'],
+        ]);
+
+        Computer::create($validated);
         return redirect()->route('computers.index')->with('success', 'Computador creado correctamente');
     }
 
     // Mostrar formulario para editar computadora
     public function edit(Computer $computer)
     {
-        $areas = Area::all();
-        return view('Computer.edit', compact('computer', 'areas'));
+        return view('Computer.edit', compact('computer'));
     }
 
     // Actualizar computadora
     public function update(Request $request, Computer $computer)
     {
-        $computer->update($request->all());
+        $validated = $request->validate([
+            'number' => ['required', 'string', 'max:255'],
+            'brand' => ['required', 'string', 'max:255'],
+        ]);
+
+        $computer->update($validated);
         return redirect()->route('computers.show', $computer->id)->with('success', 'Computador actualizado correctamente');
     }
 

@@ -10,7 +10,6 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Detalles del Área</h5>
-                    <p><strong>ID:</strong> {{ $area->id }}</p>
                     <p><strong>Nombre:</strong> {{ $area->name }}</p>
                     <p><strong>Creado:</strong> {{ $area->created_at ? $area->created_at->format('d/m/Y H:i') : 'N/A' }}</p>
                     <p><strong>Actualizado:</strong> {{ $area->updated_at ? $area->updated_at->format('d/m/Y H:i') : 'N/A' }}</p>

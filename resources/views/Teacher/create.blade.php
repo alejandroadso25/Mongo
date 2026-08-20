@@ -38,7 +38,7 @@
                             @enderror
                         </div>
                         <div class="form-group mb-3">
-                            <label for="training_center_id" class="form-label">Centro de Capacitación:</label>
+                            <label for="training_center_id" class="form-label">Centro de Formación:</label>
                             <select id="training_center_id" name="training_center_id" class="form-select @error('training_center_id') is-invalid @enderror" required>
                                 <option value="">Seleccionar centro</option>
                                 @foreach ($trainingCenters as $center)

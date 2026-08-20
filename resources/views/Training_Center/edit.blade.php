@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h2>Editar Centro de Capacitación</h2>
+                    <h2>Editar Centro de Formación</h2>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('training-centers.update', $trainingCenter->id) }}" method="POST">

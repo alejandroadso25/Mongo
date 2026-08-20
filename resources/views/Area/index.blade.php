@@ -35,7 +35,6 @@
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th>ID</th>
                         <th>Nombre</th>
                         <th>Acciones</th>
                     </tr>
@@ -43,7 +42,6 @@
                 <tbody>
                     @foreach ($areas as $area)
                         <tr>
-                            <td>{{ $area->id }}</td>
                             <td>{{ $area->name }}</td>
                             <td>
                                 <a href="{{ route('areas.show', $area->id) }}" class="btn btn-info btn-sm">Ver</a>

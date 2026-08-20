@@ -31,7 +31,6 @@
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th>ID</th>
                         <th>Curso</th>
                         <th>Docente</th>
                         <th>Acciones</th>
@@ -40,7 +39,6 @@
                 <tbody>
                     @foreach ($courseTeachers as $courseTeacher)
                         <tr>
-                            <td>{{ $courseTeacher->id }}</td>
                             <td>{{ $courseTeacher->course?->course_number ?? 'N/A' }} - {{ $courseTeacher->course?->area?->name ?? 'N/A' }}</td>
                             <td>{{ $courseTeacher->teacher?->name ?? 'N/A' }}</td>
                             <td>

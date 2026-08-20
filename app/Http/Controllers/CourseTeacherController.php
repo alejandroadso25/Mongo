@@ -45,7 +45,12 @@ class CourseTeacherController extends Controller
 
     public function store(Request $request)
     {
-        CourseTeacher::create($request->all());
+        $validated = $request->validate([
+            'course_id' => ['required', 'string', 'max:100'],
+            'teacher_id' => ['required', 'string', 'max:100'],
+        ]);
+
+        CourseTeacher::create($validated);
         return redirect()->route('course-teachers.index')->with('success', 'Asignación creada correctamente');
     }
 
@@ -58,7 +63,12 @@ class CourseTeacherController extends Controller
 
     public function update(Request $request, CourseTeacher $courseTeacher)
     {
-        $courseTeacher->update($request->all());
+        $validated = $request->validate([
+            'course_id' => ['required', 'string', 'max:100'],
+            'teacher_id' => ['required', 'string', 'max:100'],
+        ]);
+
+        $courseTeacher->update($validated);
         return redirect()->route('course-teachers.show', $courseTeacher->id)->with('success', 'Asignación actualizada correctamente');
     }
 

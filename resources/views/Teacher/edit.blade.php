@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h2>Editar Docente</h2>
+                    <h2>Editar Instructor</h2>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('teachers.update', $teacher->id) }}" method="POST">

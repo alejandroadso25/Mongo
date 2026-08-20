@@ -9,12 +9,11 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Detalles del Aprendiz</h5>
-                    <p><strong>ID:</strong> {{ $apprentice->id }}</p>
                     <p><strong>Nombre:</strong> {{ $apprentice->name }}</p>
                     <p><strong>Email:</strong> {{ $apprentice->email }}</p>
-                    <p><strong>Celular:</strong> {{ $apprentice->phone ?? $apprentice->cell_number ?? 'N/A' }}</p>
+                    <p><strong>Celular:</strong> {{ $apprentice->cell_number ?? 'N/A' }}</p>
                     <p><strong>Curso:</strong> {{ $apprentice->course?->course_number ?? 'No asignado' }}</p>
-                    <p><strong>Computadora:</strong> {{ $apprentice->computer?->brand . ' (' . $apprentice->computer?->number . ')' ?? 'No asignada' }}</p>
+                    <p><strong>Computadora:</strong> {{ $apprentice->computer_display }}</p>
                     <p><strong>Creado:</strong> {{ $apprentice->created_at ? $apprentice->created_at->format('d/m/Y H:i') : 'N/A' }}</p>
                 </div>
             </div>

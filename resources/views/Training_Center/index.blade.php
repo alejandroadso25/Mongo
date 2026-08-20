@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-5">
     <div class="row mb-4">
-        <div class="col-md-6"><h2>Centros de Capacitación</h2></div>
+        <div class="col-md-6"><h2>Centros de Formación</h2></div>
         <div class="col-md-6 text-end">
             <a href="{{ route('training-centers.create') }}" class="btn btn-primary">+ Nuevo Centro</a>
         </div>
@@ -31,7 +31,6 @@
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th>ID</th>
                         <th>Nombre</th>
                         <th>Ubicación</th>
                         <th>Acciones</th>
@@ -40,7 +39,6 @@
                 <tbody>
                     @foreach ($training_centers as $training_center)
                         <tr>
-                            <td>{{ $training_center->id }}</td>
                             <td>{{ $training_center->name }}</td>
                             <td>{{ $training_center->location }}</td>
                             <td>

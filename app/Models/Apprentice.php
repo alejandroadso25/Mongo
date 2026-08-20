@@ -13,7 +13,7 @@ class Apprentice extends Model
     protected $fillable = [
         'name',
         'email',
-        'phone',       // o 'cell_number', asegúrate de que coincida con el formulario
+        'cell_number',
         'course_id',
         'computer_id'
     ];

@@ -29,7 +29,7 @@ Route::delete('areas/{area}', [AreaController::class, 'destroy'])->name('areas.d
 Route::get('training-centers', [TrainingCenterController::class, 'index'])->name('training-centers.index');
 Route::get('training-centers/create', [TrainingCenterController::class, 'create'])->name('training-centers.create');
 Route::post('training-centers', [TrainingCenterController::class, 'store'])->name('training-centers.store');
-Route::get('training-centers/{training_center}', [TrainingCenterController::class, 'show'])->name('training-centers.show');
+Route::get('training-centers/{trainingCenter}', [TrainingCenterController::class, 'show'])->name('training-centers.show');
 Route::get('training-centers/{trainingCenter}/edit', [TrainingCenterController::class, 'edit'])->name('training-centers.edit');
 Route::put('training-centers/{trainingCenter}', [TrainingCenterController::class, 'update'])->name('training-centers.update');
 Route::delete('training-centers/{trainingCenter}', [TrainingCenterController::class, 'destroy'])->name('training-centers.destroy');

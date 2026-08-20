@@ -25,18 +25,6 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="form-group mb-3">
-                            <label for="area_id" class="form-label">Área:</label>
-                            <select id="area_id" name="area_id" class="form-select @error('area_id') is-invalid @enderror" required>
-                                <option value="">Seleccionar área</option>
-                                @foreach ($areas as $area)
-                                    <option value="{{ $area->id }}" {{ old('area_id') == $area->id ? 'selected' : '' }}>{{ $area->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('area_id')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
                         <div class="d-flex gap-2">
                             <button type="submit" class="btn btn-primary">Guardar</button>
                             <a href="{{ route('computers.index') }}" class="btn btn-secondary">Cancelar</a>

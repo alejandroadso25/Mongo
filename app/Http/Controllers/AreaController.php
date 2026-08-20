@@ -39,7 +39,11 @@ class AreaController extends Controller
     // Guardar nueva área
     public function store(Request $request)
     {
-        Area::create($request->all());
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        Area::create($validated);
         return redirect()->route('areas.index')->with('success', 'Área creada correctamente');
     }
 
@@ -52,7 +56,11 @@ class AreaController extends Controller
     // Actualizar área
     public function update(Request $request, Area $area)
     {
-        $area->update($request->all());
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        $area->update($validated);
         return redirect()->route('areas.show', $area->id)->with('success', 'Área actualizada correctamente');
     }
 

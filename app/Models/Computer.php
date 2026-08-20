@@ -4,7 +4,7 @@ namespace App\Models;
 
 use MongoDB\Laravel\Eloquent\Model;
 
-// Modelo de Computadora - Representa dispositivos asignados a áreas y aprendices
+// Modelo de Computadora
 class Computer extends Model
 {
     // Conexión a la base de datos MongoDB
@@ -14,28 +14,15 @@ class Computer extends Model
     protected $fillable = [
         'number',   // Número o identificador de la computadora
         'brand',    // Marca de la computadora
-        'area_id',  // Referencia al área donde se encuentra el equipo
     ];
 
     // Atributos computados a incluir en la serialización
-    protected $appends = ['area_name', 'full_name'];
-
-    // Relación: Un computador pertenece a un Área
-    public function area()
-    {
-        return $this->belongsTo(Area::class, 'area_id');
-    }
+    protected $appends = ['full_name'];
 
     // Relación: Una computadora puede ser usada por muchos aprendices
     public function apprentices()
     {
         return $this->hasMany(Apprentice::class, 'computer_id');
-    }
-
-    // Accesor: Nombre del área
-    public function getAreaNameAttribute()
-    {
-        return $this->area?->name ?? 'Sin área asignada';
     }
 
     // Accesor: Nombre completo (marca + número)

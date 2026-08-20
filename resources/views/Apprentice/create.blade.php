@@ -32,9 +32,9 @@
 
                         <!-- Celular -->
                         <div class="form-group mb-3">
-                            <label for="phone" class="form-label">Celular:</label>
-                            <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}" required>
-                            @error('phone')
+                            <label for="cell_number" class="form-label">Celular:</label>
+                            <input type="text" class="form-control @error('cell_number') is-invalid @enderror" id="cell_number" name="cell_number" value="{{ old('cell_number') }}" required>
+                            @error('cell_number')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -62,7 +62,7 @@
                                 <option value="">Seleccionar computadora (Opcional)</option>
                                 @foreach ($computers as $computer)
                                     <option value="{{ $computer->id }}" {{ old('computer_id') == $computer->id ? 'selected' : '' }}>
-                                        {{ $computer->brand }} - {{ $computer->number }} (Área: {{ $computer->area?->name ?? 'N/A' }})
+                                        {{ $computer->brand }} - {{ $computer->number }}
                                     </option>
                                 @endforeach
                             </select>

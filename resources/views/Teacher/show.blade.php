@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h2>Detalles del Docente</h2>
+                    <h2>Detalles del Instructor</h2>
                 </div>
                 <div class="card-body">
                     <div class="form-group row mb-3">
